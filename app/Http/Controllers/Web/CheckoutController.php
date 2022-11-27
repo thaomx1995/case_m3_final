@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class CheckoutController extends Controller
@@ -41,6 +42,7 @@ class CheckoutController extends Controller
     }
     public function save_checkout(Request $request )
     {
+
         $data = array();
         $data['name'] = $request->name;
         $data['address'] = $request->address;
@@ -52,12 +54,27 @@ class CheckoutController extends Controller
 
         $request->session()->put('id', $id);
 
+        $datas = [
+            'name' => $request->name,
+            'email' => $request->email,
+        ];
+        Mail::send('admin.mail.mail', compact('datas'), function ($email) use($request) {
+            $email->subject('eshopee');
+            $email->to($request->email, $request->name);
+        });
+
+        // Mail::send('admin.mail.mail', compact('data'), function ($email) use($request) {
+        //     $email->subject('NowSaiGon');
+        //     $email->to($request->email, $request->name);
+        // });
+
         return redirect()->route('payment');
 
     }
     public function payment()
     {
-        return 'ok';
+
+        return view('pages.ok');
     }
     public function logout_checkout(Request $request)
     {

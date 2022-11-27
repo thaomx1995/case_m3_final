@@ -20,6 +20,8 @@
               <h5 class="card-title">Liệt kê sản phẩm</h5>
               <!-- Table with stripped rows -->
               <table class="table table-striped">
+                <a href="{{ route('product.exel') }}"
+                class="btn btn-sm btn-icon btn-warning">Xuất Exel</a>
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -44,12 +46,12 @@
                           @endif
                       </td>
                       <td>
-                        <form action="{{route('product.destroy',$product->id)}}" method="post">
-                            @method('delete')
+                        <form action="{{route('product.softdeletes',$product->id)}}" method="post">
+                            @method('put')
                             @csrf
                             <a href="{{ route('product.edit', $product->id) }}"
                                     class="btn btn-sm btn-icon btn-success">Edit</a>
-                            <button onclick="return confirm('bạn muốn xóa truyện này?');" class="btn btn-sm btn-icon btn-danger">Delete</button>
+                            <button onclick="return confirm('bạn muốn xóa sản phẩm này?');" class="btn btn-sm btn-icon btn-danger">Delete</button>
                             </form>
                       </td>
                     </tr>

@@ -43,12 +43,13 @@
                           @endif
                       </td>
                       <td>
-                        <form action="{{route('category.destroy',$category->id)}}" method="post">
-                            @method('delete')
-                            @csrf
+                        <form action="{{route('category.softdeletes',$category->id)}}" method="post">
+
                             <a href="{{ route('category.edit', $category->id) }}"
                                     class="btn btn-sm btn-icon btn-success">Edit</a>
-                            <button onclick="return confirm('bạn muốn xóa truyện này?');" class="btn btn-sm btn-icon btn-danger">Delete</button>
+                                    @method('put')
+                                    @csrf
+                            <button type="submit" onclick="return confirm('bạn muốn chuyển vào thùng rác?');" class="btn btn-sm btn-icon btn-danger">Delete</button>
                             </form>
                       </td>
                     </tr>

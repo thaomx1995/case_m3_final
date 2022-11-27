@@ -1,14 +1,21 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\OderController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Web\ProductController as WebProductController;
 use App\Http\Controllers\Web\CartController as WebCartController;
 use App\Http\Controllers\Web\CheckoutController;
+use App\Http\Controllers\Web\TaskController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
@@ -22,33 +29,154 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('layout.master');
-});
-Route::get('index', function () {
-    return view('home');
-});
-Route::get('/', [HomeController::class, 'index'])->name('trangchu');
 
-// Route::resource('trangchu', HomeController::class);
+
+
+//login-admin-----------
 
 
 // -------------
+
+// Route::get('login', [AdminController::class, 'loginView'])->name('login.admin');
+// Route::get('logout', [AdminController::class, 'logout'])->name('logout');
+// Route::post('admin-dashboad', [AdminController::class, 'login'])->name('admin-dashboad.admin');
+// Route::get('dashboad', [AdminController::class, 'dashboad'])->name('dashboad.admin');
+
+//==============
+Route::get('/login', [UserController::class, 'viewLogin'])->name('login');
+Route::post('handdle-login', [UserController::class, 'login'])->name('handdle-login');
+
+
+Route::get('/register', [UserController::class, 'viewRegister'])->name('viewRegister');
+Route::post('/handdle-register', [UserController::class, 'register'])->name('handdle-register');
+
+Route::middleware(['auth', 'revalidate'])->group(function () {
+    Route::get('dashboard', function () {
+        return view('admin.dashboad.index');
+    })->name('dashboard.home');
+    Route::get('master', function () {
+        return view('layout.master');
+    })->name('master');
+    Route::post('logout', [UserController::class, 'logout'])->name('logout');
 Route::prefix('admin')->group(function () {
+    //category
+    Route::prefix('category')->group(function () {
+        Route::put('SoftDeletes/{id}', [CategoryController::class, 'softdeletes'])->name('category.softdeletes');
+        Route::get('trash', [CategoryController::class, 'trash'])->name('category.trash');
+        Route::put('restoredelete/{id}', [CategoryController::class, 'restoredelete'])->name('category.restoredelete');
+    });
     Route::resource('category', CategoryController::class);
+    //brand
+    Route::prefix('brand')->group(function () {
+        Route::put('SoftDeletes/{id}', [BrandController::class, 'softdeletes'])->name('brand.softdeletes');
+        Route::get('trash', [BrandController::class, 'trash'])->name('brand.trash');
+        Route::put('restoredelete/{id}', [BrandController::class, 'restoredelete'])->name('brand.restoredelete');
+    });
     Route::resource('brand', BrandController::class);
+    //product
+    Route::prefix('product')->group(function () {
+        Route::put('SoftDeletes/{id}', [ProductController::class, 'softdeletes'])->name('product.softdeletes');
+        Route::get('trash', [ProductController::class, 'trash'])->name('product.trash');
+        Route::put('restoredelete/{id}', [ProductController::class, 'restoredelete'])->name('product.restoredelete');
+        Route::get('export', [ProductController::class, 'export'])->name('product.exel');
+
+    });//mmm
     Route::resource('product', ProductController::class);
-    Route::resource('cart', CartController::class);
+//user
+    Route::prefix('user')->group(function () {
+
+    });
     Route::resource('user', UserController::class);
+//group
+    Route::prefix('group')->group(function () {
+
+    });
+    Route::resource('group', GroupController::class);
+
+//customer
+    Route::prefix('customer')->group(function () {
+
+    });
+    Route::resource('customer', CustomerController::class);
+//oder
+    Route::prefix('oder')->group(function () {
+
+        Route::get('export', [OderController::class, 'export'])->name('oder.exel');
+
+    });
+    Route::resource('oder', OderController::class);
+//slider
+
 });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::get('/chi-tiet-san-pham/{id}', [WebProductController::class, 'show'])->name('web_product.show');
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
 
 
-
+Route::get('/', [HomeController::class, 'index'])->name('trangchu');
 //------------------Cart
+// Route::resource('cart', CartController::class);
 Route::get('/gio-hang', [WebCartController::class, 'index'])->name('web.cart.index');
 Route::post('/them-vao-gio-hang', [WebCartController::class, 'add_to_cart'])->name('web.cart.add_to_cart');
 Route::post('/cap-nhat-gio-hang', [WebCartController::class, 'update_cart'])->name('web.cart.update_cart');
@@ -62,3 +190,7 @@ Route::get('/chekcout', [CheckoutController::class, 'checkout'])->name('web.chec
 Route::post('/chekcout', [CheckoutController::class, 'save_checkout'])->name('web.checkout.save');
 Route::get('/payment', [CheckoutController::class, 'payment'])->name('payment');
 
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    public function index($id)
+    public function index()
     {
-        $customers = Customer::find($id);
-        return view('includes.web.header',compact('customers'));
+        $customers = Customer::all();
+        return view('admin.customer.index',compact('customers'));
     }
 }

@@ -25,7 +25,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Tên</th>
                     <th scope="col">Email</th>
-                    <th scope="col"></th>
+                    <th scope="col">Chức vụ</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -35,6 +35,9 @@
                       <th scope="row">{{$user->id}}</th>
                       <td>{{$user->name}}</td>
                       <td>{{$user->email}}</td>
+                      <td>{{$user->group->name}}</td>
+                      <td ><img src="{{asset('public/images/'.$user->image)}}" height="100" width="80"></td>
+
                       {{-- <td>
                           @if ($user->brand_status == 0)
                               <span class="text text-danger">không kích hoạt</span>

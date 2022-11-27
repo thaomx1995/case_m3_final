@@ -16,14 +16,27 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('customer')->insert([
-            "id" => 1,
-            "name" => 'mai xuan thao',
-            "phone" => '0868076222',
-            "email" => "nguyenvanA@gmail.com",
-            "password" => Hash::make(123456),
-            "oder_id" => 1,
-        ]);
+        DB::table('customer')->insert(
+            [
+            [
+                "id" => 1,
+                "name" => 'mai xuan thao',
+                "phone" => '0868076222',
+                "email" => "nguyenvanA@gmail.com",
+                "password" => Hash::make(123456),
+                "oder_id" => 1,
+            ],
+            [
+                "id" => 2,
+                "name" => 'mai xuan lan',
+                "phone" => '0868076222',
+                "email" => "nguyenvanB@gmail.com",
+                "password" => Hash::make(123456),
+                "oder_id" => 2,
+                ]
+            ]
+    );
+
 
     }
 }

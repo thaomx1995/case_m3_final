@@ -71,8 +71,37 @@
   <script src="{{asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
   <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
 
-  <!-- Template Main JS File -->    
+  <!-- Template Main JS File -->
   <script src="{{asset('assets/js/main.js')}}"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+     @php
+       if(Session::has('message')){
+       @endphp
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: "{{ Session::get('message') }}",
+            showConfirmButton: false,
+            timer: 1500
+        })
+        @php
+       }
+        @endphp
+        @php
+       if(Session::has('error')){
+       @endphp
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: "{{ Session::get('message') }}",
+            showConfirmButton: false,
+            timer: 1500
+        })
+        @php
+       }
+        @endphp
+  </script>
 
 </body>
 

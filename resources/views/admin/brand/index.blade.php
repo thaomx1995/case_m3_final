@@ -26,7 +26,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Position</th>
                     <th scope="col">Age</th>
-                    <th scope="col">Start Date</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -43,13 +43,13 @@
                           @endif
                       </td>
                       <td>
-                        <form action="{{route('brand.destroy',$brand->id)}}" method="post">
-                            @method('delete')
-                            @csrf
-                            <a href="{{ route('brand.edit', $brand->id) }}"
-                                    class="btn btn-sm btn-icon btn-success">Edit</a>
-                            <button onclick="return confirm('bạn muốn xóa truyện này?');" class="btn btn-sm btn-icon btn-danger">Delete</button>
-                            </form>
+                            <form action="{{route('brand.softdeletes', $brand->id)}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @method('put')
+                                <a href="{{ route('brand.edit', $brand->id) }}"
+                                        class="btn btn-sm btn-icon btn-success">Edit</a>
+                                <button type="submit" onclick="return confirm('bạn muốn chuyển vào thùng rác?');" class="btn btn-sm btn-icon btn-danger">Delete</button>
+                                </form>
                       </td>
                     </tr>
                     @endforeach
@@ -62,4 +62,8 @@
           </div>
         </div>
       </div>
+
+    <script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+
 @endsection
