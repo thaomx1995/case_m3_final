@@ -19,9 +19,33 @@
             <div class="card-body">
               <h5 class="card-title">Liệt kê sản phẩm</h5>
               <!-- Table with stripped rows -->
+              <form action="" method="GET" id="form-search">
               <table class="table table-striped">
-                <a href="{{ route('product.exel') }}"
-                class="btn btn-sm btn-icon btn-warning">Xuất Exel</a>
+                <a href="{{ route('product.exel') }}"class="btn btn-sm btn-icon btn-warning">Xuất Exel</a>
+                <a class="btn btn-sm btn-icon btn-warning" type="button" name="key" value="{{ $f_key }}" data-bs-toggle="modal" data-bs-target="#basicModal">Tìm nâng cao</a>
+                    @include('admin.product.modals.modalproductcolumns')
+                    @if (!count($products))
+                        <p class="text-success">
+                        <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                            không tìm thấy.
+                        </div>
+                        </p>
+                    @endif
+                    @if (Session::has('success'))
+                        <p class="text-success">
+                        <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                            {{ Session::get('success') }}</div>
+                        </p>
+                    @endif
+                    @if (Session::has('error'))
+                        <p class="text-danger">
+                        <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                            {{ Session::get('error') }}</div>
+                        </p>
+                    @endif
+                </form>
+
+
                 <thead>
                   <tr>
                     <th scope="col">#</th>

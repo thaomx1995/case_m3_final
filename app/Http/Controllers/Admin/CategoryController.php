@@ -13,12 +13,15 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        // $this->authorize('viewAny', Category::class);
+
         $categorys = Category::all()->where('deleted_at',null);
 
         return view('admin.category.index', compact('categorys'));
     }
     public function create()
     {
+        // $this->authorize('create', Category::class);
 
         return view('admin.category.create');
     }
@@ -38,6 +41,8 @@ class CategoryController extends Controller
     }
     public function edit($id)
     {
+        // $this->authorize('update', Category::class);
+
         $categorys = Category::find($id);
         return view('admin.category.edit',compact('categorys'));
 
@@ -57,6 +62,8 @@ class CategoryController extends Controller
     }
     public function destroy($id)
     {
+        $this->authorize('forceDelete', Category::class);
+
         $notification = [
             'message' => 'Xóa danh mục thành công!',
             'alert-type' => 'success'
@@ -72,11 +79,15 @@ class CategoryController extends Controller
         }
     }
     public function trash(){
+        // $this->authorize('viewtrash', Category::class);
+
         $categorys = Category::onlyTrashed()->get();
         $param = ['categorys'    => $categorys];
         return view('admin.category.trash', $param);
     }
     public  function softdeletes($id){
+        $this->authorize('delete', Category::class);
+
         $notification = [
             'message' => 'Đã chuyển vào thùng rác!',
             'alert-type' => 'success'
@@ -84,22 +95,21 @@ class CategoryController extends Controller
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $categorys = Category::findOrFail($id);
         $categorys->deleted_at = date("Y-m-d h:i:s");
-        
+
         $categorys->save();
         return redirect()->route('category.index')->with($notification);
 
     }
     public function restoredelete($id){
+        // $this->authorize('restore',Category::class);
+
         $notification = [
             'message' => 'Khôi phục thành công!',
             'alert-type' => 'success'
         ];
         $categorys=Category::withTrashed()->where('id', $id);
         $categorys->restore();
-        // $notification = [
-        //         'message' => 'Khôi phục thành công!',
-        //          'alert-type' => 'success'
-        //     ];
+
         return redirect()->route('category.trash')->with($notification);
 
 

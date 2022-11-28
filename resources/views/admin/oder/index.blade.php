@@ -4,7 +4,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Danh mục</h1>
+      <h1>Danh sách đơn hàng</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -26,9 +26,10 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Tên</th>
+                    <th scope="col">Địa chỉ</th>
                     <th scope="col">Số điện thoại</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Start Date</th>
+                    <th scope="col">Giá</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -39,8 +40,8 @@
                       <td>{{$oder->address}}</td>
                       <td>{{$oder->phone}}</td>
                       <td>{{$oder->email}}</td>
-                      <td>{{$oder->note}}</td>
-                      <td>{{$oder->order_total_price}}</td>
+                      {{-- <td>{{$oder->note}}</td> --}}
+                      <td>{{number_format($oder->order_total_price)."VND"}}</td>
                       <td>
                         <form action="" method="post">
 

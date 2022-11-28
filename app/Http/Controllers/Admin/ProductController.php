@@ -9,23 +9,77 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $products = Product::all()->where('deleted_at',null);;
+        $categorys = Category::all();
+        $brands = Brand::all();
+        $key        = $request->key ?? '';
+        $product_name      = $request->product_name ?? '';
+        $product_price      = $request->product_price ?? '';
+        $category_id      = $request->category_id ?? '';
+        $brand_id      = $request->brand_id ?? '';
+        $id         = $request->id ?? '';
+        // dd($request->all());
 
-        return view('admin.product.index', compact('products'));
+        $query = Product::query(true);
+        if ($product_name) {
+            $query->where('product_name', 'LIKE', '%' . $product_name . '%');
+        }
+        if ($product_price) {
+            $query->where('product_price', 'LIKE', '%' . $product_price . '%');
+        }
+        if ($category_id) {
+            $query->where('category_id', 'LIKE', '%' . $category_id . '%');
+        }
+        if ($brand_id) {
+            $query->where('brand_id', 'LIKE', '%' . $brand_id . '%');
+        }
+        if ($id) {
+            $query->where('id', $id);
+        }
+        if ($key) {
+            $query->orWhere('id', $key);
+            $query->orWhere('product_name', 'LIKE', '%' . $key . '%');
+            $query->orWhere('product_price', 'LIKE', '%' . $key . '%');
+            $query->orWhere('category_id', 'LIKE', '%' . $key . '%');
+            $query->orWhere('brand_id', 'LIKE', '%' . $key . '%');
+        }
+        // DB::enableQueryLog();
+        $products = $query->get();
+        // dd(DB::getQueryLog());
+        $params = [
+            'f_id'        => $id,
+            'f_product_name'     => $product_name,
+            'f_product_price'     => $product_price,
+            'f_category_id'     => $category_id,
+            'f_brand_id'     => $brand_id,
+            'f_key'       => $key,
+            'f_categorys' => $categorys,
+            'f_brands' => $brands,
+            'products'    => $products,
+        ];
+        // dd($products);
+        return view('admin.product.index', $params);
+        // $products = Product::all()->where('deleted_at',null);
+
+        // return view('admin.product.index', compact('products'));
     }
     public function create()
     {
+        // $this->authorize('create', Product::class);
+        $products = Product::all();
         $brands = Brand::all();
         $categorys = Category::all();
-        return view('admin.product.create',compact('categorys','brands'));
+
+        return view('admin.product.create',compact('categorys','brands','products'));
     }
     public function store(ProductRequest $request)
     {
@@ -49,12 +103,16 @@ class ProductController extends Controller
             $products->product_image = $new_image;
         $products->product_status = $request->product_status;
         $products->product_name = $request->product_name;
+
         $products->save();
+
         return redirect()->route('product.index')->with($notification);
 
     }
     public function edit($id)
     {
+        // $this->authorize('update', Product::class);
+
         $brands = Brand::all();
         $categorys = Category::all();
         $products = Product::find($id);
@@ -149,6 +207,8 @@ class ProductController extends Controller
         {
            return Excel::download(new ProductExport, 'users.xlsx');
         }
+
+    
 
     }
 

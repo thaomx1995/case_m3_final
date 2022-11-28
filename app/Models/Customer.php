@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class Customer extends Authenticatable
 
-class Customer extends Model
 {
     use HasFactory;
     protected $table = 'customer';
@@ -18,4 +19,8 @@ class Customer extends Model
         'oder_id',
 
     ];
+    function oder()
+    {
+        return $this->belongsTo(Oder::class , 'id');
+    }
 }

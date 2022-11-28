@@ -1147,3 +1147,44 @@
 </body>
 
 </html>
+
+<form action="" method="GET" id="form-search">
+    <!-- .nav-tabs -->
+    <div class="input-group input-group-alt">
+        <!-- .input-group-prepend -->
+        <div class="input-group-prepend">
+            <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
+            data-bs-target="#basicModal">Tìm nâng cao</button>
+        </div><!-- /.input-group-prepend -->
+        <div class="input-group">
+            <div class="input-group-prepend">
+
+
+            </div>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-secondary" data-toggle="modal" data-target="#modalSaveSearch"
+                type="submit">Tìm kiếm</button>
+        </div>
+    </div><!-- /.input-group -->
+    @include('admin.product.modals.modalproductcolumns')
+    @if (!count($products))
+        <p class="text-success">
+        <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+            không tìm thấy.
+        </div>
+        </p>
+    @endif
+    @if (Session::has('success'))
+        <p class="text-success">
+        <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+            {{ Session::get('success') }}</div>
+        </p>
+    @endif
+    @if (Session::has('error'))
+        <p class="text-danger">
+        <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+            {{ Session::get('error') }}</div>
+        </p>
+    @endif
+</form>

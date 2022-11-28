@@ -78,7 +78,6 @@ Route::prefix('admin')->group(function () {
         Route::put('SoftDeletes/{id}', [ProductController::class, 'softdeletes'])->name('product.softdeletes');
         Route::get('trash', [ProductController::class, 'trash'])->name('product.trash');
         Route::put('restoredelete/{id}', [ProductController::class, 'restoredelete'])->name('product.restoredelete');
-        Route::get('export', [ProductController::class, 'export'])->name('product.exel');
 
     });//mmm
     Route::resource('product', ProductController::class);
@@ -89,7 +88,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('user', UserController::class);
 //group
     Route::prefix('group')->group(function () {
-
+        Route::get('/detail/{id}', [GroupController::class, 'detail'])->name('group.detail');
+        Route::put('/group_detail/{id}', [GroupController::class, 'group_detail'])->name('group.group_detail');
     });
     Route::resource('group', GroupController::class);
 
@@ -100,16 +100,17 @@ Route::prefix('admin')->group(function () {
     Route::resource('customer', CustomerController::class);
 //oder
     Route::prefix('oder')->group(function () {
-
         Route::get('export', [OderController::class, 'export'])->name('oder.exel');
+
 
     });
     Route::resource('oder', OderController::class);
-//slider
+    //slider
 
 });
 });
 
+Route::get('export', [ProductController::class, 'export'])->name('product.exel');
 
 
 
@@ -176,7 +177,7 @@ Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->n
 
 Route::get('/', [HomeController::class, 'index'])->name('trangchu');
 //------------------Cart
-// Route::resource('cart', CartController::class);
+Route::resource('cart', CartController::class);
 Route::get('/gio-hang', [WebCartController::class, 'index'])->name('web.cart.index');
 Route::post('/them-vao-gio-hang', [WebCartController::class, 'add_to_cart'])->name('web.cart.add_to_cart');
 Route::post('/cap-nhat-gio-hang', [WebCartController::class, 'update_cart'])->name('web.cart.update_cart');

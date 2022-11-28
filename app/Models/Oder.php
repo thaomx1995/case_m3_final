@@ -18,4 +18,8 @@ class Oder extends Model
         'note',
 
     ];
+    function customers()
+    {
+        return $this->hasMany(Customer::class , 'id');
+    }
 }

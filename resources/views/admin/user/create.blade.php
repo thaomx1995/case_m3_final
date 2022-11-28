@@ -32,45 +32,46 @@
                         <!-- No Labels Form -->
                         <form action="{{ route('user.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
                             @csrf
-                            <div class="col-md-10">
+                            <div class="col-md-17">
                                 <input type="text" class="form-control" name="name" placeholder="Tên nhân viên">
                             </div>
                             @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            <div class="col-md-10">
+                            <div class="col-md-17">
                                 <input type="text" class="form-control" name="email" placeholder="email">
                             </div>
                             @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            <div class="col-md-10">
+                            <div class="col-md-17">
                                 <input type="text" class="form-control" name="password" placeholder="password">
                             </div>
                             @error('password')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            <div class="col-md-10">
+                            <div class="col-md-17">
                                 <input type="text" class="form-control" name="address" placeholder="address">
                             </div>
                             @error('address')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            <div class="col-md-10">
+                            <div class="col-md-17">
                                 <input type="number" class="form-control" name="phone" placeholder="phone">
                             </div>
                             @error('phone')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            <div class="mb-3">
+                            <div class="col-md-17">
                                 <input type="file" class="form-control" name="image"
                                     placeholder="Hình ảnh ">
-                                <img src="{{ asset('public/images/') }}" id="exampleInputPassword1" height="100"
+                                <img type='hidden' src="{{ asset('public/images/') }}" id="exampleInputPassword1" height="100"
                                     width="80">
                             </div>
                             @error('image')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
+                            <div class="col-md-17">
                             <select name="gender" id="" class="form-control">
                                 <option value="">--Vui lòng chọn--</option>
                                 <option value="Nam">Nam</option>
@@ -79,21 +80,25 @@
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach --}}
                             </select>
+                            </div>
+
                             @error('gender')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            <div class="col-md-10">
+                            <div class="col-md-17">
                                 <input type="date" class="form-control" name="birthday" placeholder="birthday">
                             </div>
                             @error('birthday')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
+                            <div class="col-md-17">
                             <select name="group_id" id="" class="form-control">
                                 <option value="">--Vui lòng chọn--</option>
                                 @foreach ($groups as $group)
                                     <option value="{{ $group->id }}">{{ $group->name }}</option>
                                 @endforeach
                             </select>
+                            </div>
                             @error('group_id')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

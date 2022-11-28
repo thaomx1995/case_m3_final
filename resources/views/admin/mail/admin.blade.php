@@ -16,7 +16,6 @@
         <table role="presentation" style="width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;">
           <tr>
             <td align="center" style="padding:40px 0 30px 0;background:#f1b543;">
-                <h1></h1>
             </td>
           </tr>
           <tr>
@@ -39,6 +38,7 @@
                       <tr>
                         <td style="width:260px;padding:0;vertical-align:top;color:#153643;">
                           <p style="margin:0 0 25px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
+                          <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><b><i>Hãy Dùng Mật Khẩu Này Để Truy Cập Tài Khoản Của Bạn</i></b><br>
                             <b><i>Chúc Bạn Một Ngày Làm Việc Vui Vẻ!.</i></b><br>
                             <b><i>Thân Ái!.</i></b><br>
                             <h4><i>admin: mai xuân thảo (eshopee)</i></h4></p>
@@ -47,9 +47,10 @@
                         </td>
                         <td style="width:20px;padding:0;font-size:0;line-height:0;">&nbsp;</td>
                         <td style="width:260px;padding:0;vertical-align:top;color:#153643;">
-                          <p style="margin:0 0 25px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><img src="https://4tech.vn/storage/7/shopee.png" alt="" width="260" style="height:auto;display:block;" /></p>
-                            <b><i>Bạn đã đặt hàng thành công</i></b><br></p></p>
-                          <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="#" style="color:#ee4c50;text-decoration:underline;">Eshopee</a></p>
+                          <p style="margin:0 0 25px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><img src="https://img4.thuthuatphanmem.vn/uploads/2020/08/28/background-chao-mung-powerpoint_090351149.jpg" alt="" width="260" style="height:auto;display:block;" /></p>
+                          <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><b><i>Chào Mừng Bạn Đã Gia Nhập Vào Công Ty Của Chúng Tôi</i></b><br>
+                            <b><i>Chúng Tôi Rất Mong Muốn Bạn Luôn Đồng hành Cùng Chúng Tôi Và Cống Hiến Hiến Mình. Mọi Nổ Lực Của Bạn Sẽ Được Đền Đáp</i></b><br></p></p>
+                          <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="#" style="color:#ee4c50;text-decoration:underline;">Now Chào bé</a></p>
                         </td>
                       </tr>
                     </table>
@@ -74,6 +75,7 @@
                           <a href="http://www.twitter.com/" style="color:#ffffff;"><img src="https://assets.codepen.io/210284/tw_1.png" alt="Twitter" width="38" style="height:auto;display:block;border:0;" /></a>
                         </td>
                         <td style="padding:0 0 0 10px;width:38px;">
+                          <a href="http://www.facebook.com/" style="color:#ffffff;"><img src="https://assets.codepen.io/210284/fb_1.png" alt="Facebook" width="38" style="height:auto;display:block;border:0;" /></a>
                         </td>
                       </tr>
                     </table>

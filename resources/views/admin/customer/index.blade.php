@@ -26,7 +26,6 @@
                     <th scope="col">Tên</th>
                     <th scope="col">Số điện thoại</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Start Date</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -36,15 +35,9 @@
                       <td>{{$customer->name}}</td>
                       <td>{{$customer->phone}}</td>
                       <td>{{$customer->email}}</td>
+                      <td>{{$customer->created}}</td>
                       <td>
-                        <form action="" method="post">
 
-                            <a href=""
-                                    class="btn btn-sm btn-icon btn-success">Edit</a>
-                                    @method('put')
-                                    @csrf
-                            <button type="submit" onclick="return confirm('bạn muốn chuyển vào thùng rác?');" class="btn btn-sm btn-icon btn-danger">Delete</button>
-                            </form>
                       </td>
                     </tr>
                     @endforeach

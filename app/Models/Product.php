@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
+
 class Product extends Model
 {
     use HasFactory,Notifiable, SoftDeletes;
@@ -23,11 +24,20 @@ class Product extends Model
         'deleted_at'
     ];
 
+
+
     function brand(){
-        return $this->belongsTo(Brand::class , 'brand_id','id');
+        return $this->belongsTo(Brand::class );
     }
     function category()
     {
-        return $this->belongsTo(Category::class ,'category_id', 'id');
+        return $this->belongsTo(Category::class );
+    }
+    public function scopeSearch($query)
+    {
+        if ($key = request()->key) {
+            $query = $query->where('id', 'like', '%' . $key . '%');
+        }
+        return $query;
     }
 }

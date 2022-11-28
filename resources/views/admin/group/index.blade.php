@@ -33,13 +33,27 @@
                       <th scope="row">{{$group->id}}</th>
                       <td>{{$group->name}}</td>
                       <td>
-                        <form action="" method="post">
+                        {{-- <form action="" method="post">
 
-                            <a href=""
-                                    class="btn btn-sm btn-icon btn-success">Edit</a>
+                           <a class="btn btn-sm btn-icon btn-success" href="{{route('group.detail', $group->id)}}">Trao Quyền</a>
                                     @method('put')
                                     @csrf
                             <button type="submit" onclick="return confirm('bạn muốn chuyển vào thùng rác?');" class="btn btn-sm btn-icon btn-danger">Delete</button>
+                            </form> --}}
+                            <form action="{{ route('group.destroy', $group->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                {{-- @if (Auth::user()->hasPermission('Group_update')) --}}
+                                <a class="btn btn-sm btn-icon btn-success" href="{{route('group.detail', $group->id)}}">Trao Quyền</a>
+                                {{-- @endif --}}
+                                {{-- @if (Auth::user()->hasPermission('Group_update'))
+                                <a href="{{ route('group.edit', $group->id) }}"
+                                    class="btn btn-sm btn-icon btn-success">Sửa</a>
+                                @endif --}}
+                                    {{-- @if (Auth::user()->hasPermission('Group_forcedelete '))
+                                    <a data-href="{{ route('group.destroy', $group->id) }}"
+                                        id="{{ $group->id }}" class="btn btn-sm btn-icon btn-success">Xóa</a>
+                                    @endif --}}
                             </form>
                       </td>
                     </tr>
