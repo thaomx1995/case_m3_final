@@ -2,9 +2,15 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\User;
+use App\Models\Group;
+use App\Models\Brand;
+use App\Policies\CategoryPolicy;
+// use Illuminate\Support\ServiceProvider;
 
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -14,6 +20,17 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Category' => 'App\Policies\CategoryPolicy',
+        'App\Models\Product' => 'App\Policies\ProductPolicy',
+        'App\Models\Group' => 'App\Policies\GroupPolicy',
+        'App\Models\User' => 'App\Policies\UserPolicy',
+        'App\Models\Brand' => 'App\Policies\BrandPolicy',
+        Category::class => CategoryPolicy::class,
+        Product::class => ProductPolicy::class,
+        Group::class => GroupPolicy::class,
+        User::class => UserPolicy::class,
+        Brand::class => BrandPolicy::class,
+
     ];
 
     /**
@@ -25,6 +42,5 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
     }
 }

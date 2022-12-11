@@ -44,13 +44,16 @@
                       </td>
                       <td>
                         <form action="{{route('category.softdeletes',$category->id)}}" method="post">
-
-                            <a href="{{ route('category.edit', $category->id) }}"
+                          @method('put')
+                          @csrf
+                          @if (Auth::user()->hasPermission('Category_update'))
+                          <a href="{{ route('category.edit', $category->id) }}"
                                     class="btn btn-sm btn-icon btn-success">Edit</a>
-                                    @method('put')
-                                    @csrf
+                          @endif
+                            @if (Auth::user()->hasPermission('Category_delete'))
                             <button type="submit" onclick="return confirm('bạn muốn chuyển vào thùng rác?');" class="btn btn-sm btn-icon btn-danger">Delete</button>
-                            </form>
+                            @endif
+                          </form>
                       </td>
                     </tr>
                     @endforeach

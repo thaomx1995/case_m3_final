@@ -3,46 +3,39 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link " href="{{route('dashboard.home')}}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
-
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Danh mục</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          @if(Auth::user()->hasPermission('Category_viewAny'))
+          @if(Auth::user()->hasPermission('Category_create'))
           <li>
             <a href="{{route('category.create')}}">
               <i class="bi bi-circle"></i><span>Thêm mới danh mục</span>
             </a>
           </li>
+          @endif
+          @if(Auth::user()->hasPermission('Category_viewAny'))
           <li>
             <a href="{{route('category.index')}}">
               <i class="bi bi-circle"></i><span>Liệt kê danh mục sản phẩm</span>
             </a>
           </li>
+          @endif
+          @if(Auth::user()->hasPermission('Category_viewtrash'))
           <li>
             <a href="{{route('category.trash')}}">
               <i class="bi bi-circle"></i><span>Thùng rác danh mục</span>
             </a>
           </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          @endif
+          @endif
         </ul>
       </li><!-- End Components Nav -->
 
@@ -51,45 +44,59 @@
           <i class="bi bi-journal-text"></i><span>Nhãn hiệu</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          @if(Auth::user()->hasPermission('Brand_viewAny'))
+          @if(Auth::user()->hasPermission('Brand_create'))
           <li>
             <a href="{{route('brand.create')}}">
               <i class="bi bi-circle"></i><span>Thêm nhãn hiệu</span>
             </a>
           </li>
+          @endif
+          @if(Auth::user()->hasPermission('Brand_viewAny'))
           <li>
             <a href="{{route('brand.index')}}">
               <i class="bi bi-circle"></i><span>Liệt kê nhãn hiệu</span>
             </a>
           </li>
+          @endif
+          @if(Auth::user()->hasPermission('Brand_viewtrash'))
           <li>
             <a href="{{route('brand.trash')}}">
               <i class="bi bi-circle"></i><span>Thùng rác thương hiệu</span>
             </a>
           </li>
-
+          @endif
+          @endif
         </ul>
       </li><!-- End Forms Nav -->
-
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Sản phẩm</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          @if(Auth::user()->hasPermission('Product_viewAny'))
+          @if(Auth::user()->hasPermission('Product_create'))
           <li>
             <a href="{{route('product.create')}}">
               <i class="bi bi-circle"></i><span>Thêm sản phẩm</span>
             </a>
           </li>
+          @endif
+          @if(Auth::user()->hasPermission('Product_viewAny'))
           <li>
             <a href="{{route('product.index')}}">
               <i class="bi bi-circle"></i><span>Liệt kê sản phẩm</span>
             </a>
           </li>
+          @endif
+          @if(Auth::user()->hasPermission('Product_viewtrash'))
           <li>
             <a href="{{route('product.trash')}}">
               <i class="bi bi-circle"></i><span>Thùng rác sản phẩm</span>
             </a>
           </li>
+          @endif
+          @endif
         </ul>
       </li><!-- End Tables Nav -->
 
@@ -98,17 +105,22 @@
           <i class="bi bi-bar-chart"></i><span>Nhân viên</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          @if(Auth::user()->hasPermission('User_viewAny'))
+          @if(Auth::user()->hasPermission('User_create'))
           <li>
             <a href="{{route('user.create')}}">
                 <i class="bi bi-circle"></i><span>Thêm nhân viên</span>
               </a>
           </li>
+          @endif
+          @if(Auth::user()->hasPermission('User_viewAny'))
           <li>
             <a href="{{route('user.index')}}">
                 <i class="bi bi-circle"></i><span>Liệt kê nhân viên</span>
               </a>
           </li>
-
+          @endif
+          @endif
         </ul>
       </li><!-- End Charts Nav -->
       <li class="nav-item">
@@ -129,16 +141,22 @@
           <i class="bi bi-card-list"></i><span>Group</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="ok-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          @if(Auth::user()->hasPermission('Group_viewAny'))
+          @if(Auth::user()->hasPermission('Group_viewAny'))
           <li>
             <a href="{{route('group.index')}}">
               <i class="bi bi-circle"></i><span>Liệt kê quyền</span>
             </a>
           </li>
+          @endif
+          @if(Auth::user()->hasPermission('Group_create'))
           <li>
             <a href="{{route('group.create')}}">
               <i class="bi bi-circle"></i><span>Thêm tên quyền</span>
             </a>
           </li>
+          @endif
+          @endif
         </ul>
       </li>
 

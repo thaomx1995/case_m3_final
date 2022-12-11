@@ -18,6 +18,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+        // $this->authorize('viewAny', Product::class);
         $products = Product::all()->where('deleted_at',null);;
         $categorys = Category::all();
         $brands = Brand::all();
@@ -164,6 +165,7 @@ class ProductController extends Controller
     //     }
     public function destroy($id)
     {
+        // $this->authorize('forceDelete', Product::class);
         $notification = [
             'message' => 'Xóa sản phẩm  thành công!',
             'alert-type' => 'success'
@@ -179,11 +181,13 @@ class ProductController extends Controller
         }
     }
         public function trash(){
+            // $this->authorize('viewtrash', Product::class);
             $products = Product::onlyTrashed()->get();
             $param = ['products'    => $products];
             return view('admin.product.trash', $param);
         }
         public  function softdeletes($id){
+            // $this->authorize('delete', Product::class);
             date_default_timezone_set("Asia/Ho_Chi_Minh");
             $products = Product::findOrFail($id);
             $products->deleted_at = date("Y-m-d h:i:s");
@@ -195,6 +199,7 @@ class ProductController extends Controller
             return redirect()->route('product.index')->with($notification);
         }
         public function restoredelete($id){
+            // $this->authorize('restore', Product::class);
             $products=Product::withTrashed()->where('id', $id);
             $products->restore();
             $notification = [
@@ -208,7 +213,7 @@ class ProductController extends Controller
            return Excel::download(new ProductExport, 'users.xlsx');
         }
 
-    
+
 
     }
 

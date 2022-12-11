@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('image');
             $table->string('gender');
             $table->string('birthday');
-            $table->foreignId('group_id')->references('id')->on('group');
+            $table->unsignedBigInteger('group_id');
+            $table->foreign('group_id')->references('id')->on('group');
         });
     }
 

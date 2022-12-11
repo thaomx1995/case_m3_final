@@ -9,7 +9,7 @@
                 <div class="col-lg-4">
                     <label class="">Tên sản phẩm</label>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="input text"><input type="text" name="product_name"
                             class="form-control filter-column f-name" value="{{ $f_product_name }}" />
                     </div>
@@ -19,7 +19,7 @@
                 <div class="col-lg-4">
                     <label class="">Giá</label>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="input text"><input type="text" name="product_price"
                             class="form-control filter-column f-name" value="{{ $f_product_price }}" /></div>
                 </div>
@@ -28,7 +28,7 @@
                 <div class="col-lg-4">
                     <label class="">Mã sản phẩm</label>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="input text"><input type="text" name="id"
                             class="form-control filter-column f-name" value="{{ $f_id }}" /></div>
                 </div>
@@ -37,7 +37,7 @@
                 <div class="col-lg-4">
                     <label class=""> danh mục</label>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <select name="category_id" id="" class="form-control">
                         <option value="">-</option>
                         @foreach ($f_categorys as $category )
@@ -50,7 +50,7 @@
                 <div class="col-lg-4">
                     <label class="">Thương hiệu</label>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <select name="brand_id" id="" class="form-control">
                         <option value="">-</option>
                         @foreach ($f_brands as $brand )

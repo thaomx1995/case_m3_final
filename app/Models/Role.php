@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    public $timestamps = false;
     protected $table ='role';
     use HasFactory;
     public function groups()

@@ -73,10 +73,14 @@
                         <form action="{{route('product.softdeletes',$product->id)}}" method="post">
                             @method('put')
                             @csrf
+                            @if (Auth::user()->hasPermission('Product_update'))
                             <a href="{{ route('product.edit', $product->id) }}"
-                                    class="btn btn-sm btn-icon btn-success">Edit</a>
-                            <button onclick="return confirm('bạn muốn xóa sản phẩm này?');" class="btn btn-sm btn-icon btn-danger">Delete</button>
-                            </form>
+                                    class="btn btn-sm btn-icon btn-success" >Edit</a>
+                            @endif
+                            @if (Auth::user()->hasPermission('Product_delete'))
+                            <button onclick="return confirm('bạn muốn xóa sản phẩm này?');" data-bs-dismiss="alert" class="btn btn-sm btn-icon btn-danger">Delete</button>
+                              @endif
+                          </form>
                       </td>
                     </tr>
                     @endforeach

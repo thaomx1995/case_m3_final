@@ -46,10 +46,14 @@
                             <form action="{{route('brand.softdeletes', $brand->id)}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
+                                @if (Auth::user()->hasPermission('Brand_update'))
                                 <a href="{{ route('brand.edit', $brand->id) }}"
                                         class="btn btn-sm btn-icon btn-success">Edit</a>
+                                @endif
+                                @if (Auth::user()->hasPermission('Brand_delete'))
                                 <button type="submit" onclick="return confirm('bạn muốn chuyển vào thùng rác?');" class="btn btn-sm btn-icon btn-danger">Delete</button>
-                                </form>
+                                @endif
+                              </form>
                       </td>
                     </tr>
                     @endforeach

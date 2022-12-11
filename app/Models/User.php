@@ -3,19 +3,28 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Traits\HasPermissions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Traits\HasPermissions;
 
 class User extends Authenticatable
-{
-    use Notifiable;
-    use HasApiTokens, HasFactory, Notifiable;
-    protected $fillable = ['name','address','phone','image','gender','birthday','email','password','group_id'];
-
-
+{use Notifiable;
+    use HasApiTokens, HasFactory, Notifiable,HasPermissions;
+//     protected $fillable =
+//     ['name',
+//     'address',
+//     'phone',
+//     'image',
+//     'gender',
+//     'birthday',
+//     'email',
+//     'password',
+//     'position_id',
+// ];
+protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
@@ -24,9 +33,7 @@ class User extends Authenticatable
     // protected $fillable = [
     //     'name',
     //     'email',
-    //     'email_verified_at',
     //     'password',
-    //     'remember_token',
     // ];
 
     /**
@@ -55,12 +62,5 @@ class User extends Authenticatable
     public function products()
     {
         return $this->hasMany(Product::class, 'user_id', 'id');
-    }
-    public function scopesearch($query)
-    {
-        if ($key = request()->search) {
-            $query = $query->where('name', 'like', '%' . $key . '%');
-        }
-        return $query;
     }
 }

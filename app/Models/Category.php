@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class Category extends Model
 {
     use HasFactory,Notifiable, SoftDeletes;
-    protected $table = 'category';
+    public $table = 'category';
 
     protected $fillable = [
         'category_name',
@@ -20,6 +20,6 @@ class Category extends Model
     ];
     function products()
     {
-        return $this->hasMany(Product::class , 'id');
+        return $this->hasMany(Product::class , 'category_id', 'id');
     }
 }

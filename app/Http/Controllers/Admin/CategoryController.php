@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Gate;
 class CategoryController extends Controller
 {
     public function index()
@@ -22,11 +24,12 @@ class CategoryController extends Controller
     public function create()
     {
         // $this->authorize('create', Category::class);
-
         return view('admin.category.create');
     }
     public function store(CategoryRequest $request)
     {
+
+
         $notification = [
             'message' => 'Thêm danh mục thành công!',
             'alert-type' => 'success'
@@ -62,7 +65,7 @@ class CategoryController extends Controller
     }
     public function destroy($id)
     {
-        $this->authorize('forceDelete', Category::class);
+        // $this->authorize('forceDelete', Category::class);
 
         $notification = [
             'message' => 'Xóa danh mục thành công!',
@@ -86,7 +89,7 @@ class CategoryController extends Controller
         return view('admin.category.trash', $param);
     }
     public  function softdeletes($id){
-        $this->authorize('delete', Category::class);
+        // $this->authorize('delete', Category::class);
 
         $notification = [
             'message' => 'Đã chuyển vào thùng rác!',
